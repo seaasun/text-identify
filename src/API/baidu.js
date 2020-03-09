@@ -1,12 +1,27 @@
 const axios = require('axios')
 
+const getUrlQuery = (name) => {
+     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)")
+     var r = window.location.search.substr(1).match(reg)
+     if(r!=null)return  unescape(r[2]); return null
+}
+
 let dict = {
     access_token:  localStorage.getItem("access_token")
     // access_token: null
 }
-let url = ''
-// surl = 'http://localhost:3009'
-// url = 'https://aip.baidubce.com'
+
+let url = 'https://aip.baidubce.com'
+
+let queryMethod = getUrlQuery('queryMethod')
+// 本地代理
+if (queryMethod === 'localhost') {
+    let queryHost = getUrlQuery('host') || 7007
+    url = 'http://localhost:' + queryHost
+} else if (queryMethod === 'dev') {
+    url = ''
+}
+
 let apis = {
     auth (data) {
         console.log('token',dict.access_token)

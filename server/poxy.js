@@ -8,9 +8,6 @@ var bodyParser = require("body-parser");
 // mount `exampleProxy` in web server
 const app = express();
 app.use(cors())
-// app.use('/api',proxy('https://aip.baidubce.com'));
-
-// app.use(bodyParser.urlencoded({ extended: false }));
 app.use(
     '/', createProxyMiddleware({
         target: 'https://aip.baidubce.com', 
@@ -28,4 +25,4 @@ app.use(bodyParser.urlencoded({
 }));
 
 
-app.listen(3009);
+app.listen(7007);
