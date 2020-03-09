@@ -1,0 +1,52 @@
+.result-box {
+    display: flex;
+}
+
+.result-image {
+    flex: 1 0 30%;
+    max-width: 30%;
+    overflow: hidden;
+}
+
+.result-text {
+    flex: 1 0 70%;
+    max-width: 70%;
+    overflow: hidden;
+}
+.result-one {
+    margin-top: 48px;
+    margin-left: 48px;
+}
+.result-image-one {
+    position: relative;
+}
+.result-one-transparent {
+    opacity: 0;
+    color: rgba(255,0,0,0)
+}
+.result-one-text {
+    line-height: 0.6;
+}
+.result-one-image {
+    position: absolute;
+    left: 24px;
+    top: -16px;
+    width: 90%;
+}
+.result-one-delete {
+    position: absolute;
+    right: 0;
+    top: -16px;
+}
+.result-one-image img {
+    width: 100%;
+} 
+.result-action {
+    display: flex;
+    justify-content: center;
+}
+
+.action-btn {
+    margin: 16px !important;
+    min-width: 108px;
+}
