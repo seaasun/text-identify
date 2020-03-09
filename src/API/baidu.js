@@ -1,3 +1,4 @@
+import { message } from 'antd'
 const axios = require('axios')
 
 const getUrlQuery = (name) => {
@@ -35,6 +36,8 @@ let apis = {
         }).then (resp => {
             dict.access_token =resp.data.access_token
             localStorage.setItem('access_token', resp.data.access_token)
+        }).catch(resp => {
+            message.error('错误，无法连接网络，可能是代理服务未开启');
         }) 
     },
     ocr (data) {

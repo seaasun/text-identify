@@ -14,39 +14,29 @@ let renderOne = (words) => {
 const handleCopy = () => {
     let range = document.createRange()
     let ele = document.getElementById("result-text");
-    // console.log(copyDome)
     range.selectNode(ele)
     let selection = window.getSelection();
     selection.selectAllChildren(ele);
-    console.log(selection)
-
-    // console.log(range)
-
-    // // range.selectNodeContents(copyDome)
-
-    // // copyDome.select(); // 选择对象
     document.execCommand("Copy"); 
     
 }
 
 const languages = [
     {value: 'CHN_ENG', text: '中英'},
-    {value: 'CHN_ENG_GE', text: '中英德'},
+    {value: 'CHN_GER', text: '中德'},
+    {value: 'GER', text: '德'},
     {value: 'ENG', text: '英'},
     {value: 'JAP', text: '日'},
     {value: 'KOR', text: '韩'},
     {value: 'FRE', text: '法'},
     {value: 'SPA', text: '西班牙'},
     {value: 'POR', text: '葡萄牙'},
-    {value: 'GER', text: '德'},
     {value: 'ITA', text: '意大利'},
     {value: 'RUS', text: '俄'},
 ]
 
 function Result(text, setText, textLanguage, setTextLanguage) {  
- // if (Object.keys(text).length === 0) return null
- // cnEnGe()
-  let copyRef = React.createRef()
+ 
   const clearText = () => {
     setText({})
     }
@@ -57,12 +47,22 @@ function Result(text, setText, textLanguage, setTextLanguage) {
   }  
   const handleLanguage = (value) => {
       setTextLanguage(value)
+      localStorage.setItem('language_type', value)
   }
+
+  let defaultLanguage = "中英"
+  languages.some(item => {
+      if (item.value === textLanguage) {
+        defaultLanguage = item.text
+        return true
+      }
+  })
 
   return (
     <div >
         <div className="result-action">
-            <Select defaultValue ='中英' 
+            <Select
+                defaultValue={defaultLanguage}
                 className="action-btn"
                 onSelect={handleLanguage}>
                {
@@ -79,16 +79,19 @@ function Result(text, setText, textLanguage, setTextLanguage) {
         <div className ="result-box">
             <div className ="result-image">
             {
-                Object.keys(text).map(key => (
+                Object.keys(text).length > 0 && Object.keys(text).map(key => (
                     <div key = {key}  className = "result-image-one">
-                        <div className = "result-one result-one-transparent">
+                        <div className = "result-one resulxt-one-transparent">
                             {renderOne(text[key].words)}
                         </div>
                         <div className = "result-one-image">
-                            <img src = {text[key].image} />
+                            <img src = {text[key].image} 
+                                alt= '上传的图像'
+                                className="result-one-img"/>
                         </div>
-                        <div className = "result-one-delete" onClick={()=> {handleDeleteOne(key)}}>
-                            X
+                        <div className = "result-one-delete" 
+                                    onClick={()=> {handleDeleteOne(key)}}>
+                            <span>❌</span>
                         </div>
                     </div>
                 ))
@@ -96,11 +99,13 @@ function Result(text, setText, textLanguage, setTextLanguage) {
             }    
             </div>
             <div className ="resut-text" 
-                ref={copyRef}
+                suppressContentEditableWarning={true}
+                contentEditable={true}
                 id="result-text">
             {
-                Object.keys(text).map(key => (
+                 Object.keys(text).length > 0 && Object.keys(text).map(key => (
                     <div key = {key} 
+                    
                         className = "result-one"
                     >{renderOne(text[key].words)}</div>
                 ))

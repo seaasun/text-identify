@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "CC文字识别",
+  "name": "CC文字识别，多语言，简单高效",
   "icons": [
     {
       "src": "favicon.ico",
