@@ -1,7 +1,7 @@
 import React from 'react';
 import './result.css'
 import { Button,  Select} from 'antd';
-import cnEnGe from './cnEnGe';
+// import cnEnGe from './cnEnGe';
 const { Option} = Select;
 
 let renderOne = (words) => {

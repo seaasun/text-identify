@@ -13,7 +13,7 @@ let dict = {
 
 let url = 'https://aip.baidubce.com'
 
-let queryMethod = getUrlQuery('queryMethod')
+let queryMethod = getUrlQuery('method')
 // 本地代理
 if (queryMethod === 'localhost') {
     let queryHost = getUrlQuery('host') || 7007
